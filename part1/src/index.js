@@ -11,6 +11,7 @@ const server = new GraphQLServer({
       posts:[Post!]!
       post(id:ID!): Post!
     }
+    
     type User {
       id: ID!
       name: String!
@@ -18,6 +19,7 @@ const server = new GraphQLServer({
       married: Boolean!
       average: Float
     }
+
     type Post {
       id: ID!
       title: String!
@@ -49,6 +51,11 @@ const server = new GraphQLServer({
     },
     Post: {
       author: async (parent, args, context, info) => {
+        console.info(parent)
+        console.info(args)
+        // console.info(context)
+        // console.info(info)
+
         const response = await axios.get(`${db}/users/${parent.author}`)
         return response.data
       }
